@@ -11,7 +11,7 @@ Create a file called terraform.tfvars with the following private content:
 Most configuration values are in the variables.rf template.
 
 # chef-solo bootstrapping
-When chef-solo server is launched, it will be bootstrapped with the Chef DK and the chef-repo directory will be copied to the ec2-user's home directory. The chef-repo can be modified and the default runlist update by moifying solo.json. When the chef-solo-server is up, chef-solo is called to configure a web server and then archive the cookbooks directory and share from the web server for other clients to pull from.
+Working on knife-solo init bootstrapping. Need to create chef-solo-server recipe.
 
 # to do
 Add a chef client template that fetches its repository from the chef-solo-server.

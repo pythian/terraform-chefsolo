@@ -26,14 +26,25 @@ resource "aws_instance" "theseeker" {
 
   /* provisioners */
 
+    /* copy up private keyfile for chef-solo to use */
+    provisioner "file" {
+      source = "${var.keyfile}"
+      destination = "/home/ec2-user/.ssh/mykey"
+      connection {
+        type = "ssh"
+        user = "ec2-user"
+        key_file = "${var.keyfile}"
+      }
+    }
+
     /* install the Chef Development Kit */
     provisioner "remote-exec" {
       inline = [
-      "sudo su -c 'curl -L https://www.opscode.com/chef/install.sh | bash'", # chef DK
       "sudo yum update -y",
       "sudo yum install gcc ruby rubygems ruby-devel -y",
       "sudo gem update --system",
       "sudo gem install knife-solo",
+      "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey",
       "knife solo init chef-repo"
 #      "cd chef-repo; knife solo bootstrap"
       ]
