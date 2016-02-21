@@ -34,7 +34,7 @@ resource "aws_instance" "theseeker" {
       "sudo yum install gcc ruby rubygems ruby-devel -y",
       "sudo gem update --system",
       "sudo gem install knife-solo",
-      "knife solo init chef-repo",
+      "knife solo init chef-repo"
 #      "cd chef-repo; knife solo bootstrap"
       ]
       connection {
