@@ -38,7 +38,7 @@ resource "aws_instance" "theseeker" {
   }
   /* upload the recipes to our web server */
   provisioner "local-exec" {
-    command = "scp -r -i ${var.keyfile} -oStrictHostKeyChecking=no ./chef ec2-user@${aws_instance.theseeker.public_dns}:."
+    command = "scp -r -i ${var.keyfile} -oStrictHostKeyChecking=no ./chef-repo ec2-user@${aws_instance.theseeker.public_dns}:."
   }
 
 }
