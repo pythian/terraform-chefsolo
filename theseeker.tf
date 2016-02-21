@@ -41,11 +41,14 @@ resource "aws_instance" "theseeker" {
     provisioner "remote-exec" {
       inline = [
       "sudo yum update -y",
-      "sudo yum install gcc ruby rubygems ruby-devel -y",
+      "sudo yum install git gcc ruby rubygems ruby-devel -y",
       "sudo gem update --system",
       "sudo gem install knife-solo",
       "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey",
-      "knife solo init chef-repo"
+      "knife solo init chef-repo",
+      "knife cookbook create chef-solo-server",
+      "knife cookbook site download httpd",
+      "tar xvzf httpd*.tar.gz --directory cookbooks; rm -f httpd*.tar.gz"
       ]
       connection {
         type = "ssh"
