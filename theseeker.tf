@@ -46,7 +46,7 @@ resource "aws_instance" "theseeker" {
       "sudo gem install knife-solo",
       "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey",
       "knife solo init chef-repo",
-      "knife cookbook create chef-solo-server",
+      "knife cookbook create chef-solo-workstation",
       "knife cookbook site download httpd",
       "tar xvzf httpd*.tar.gz --directory cookbooks; rm -f httpd*.tar.gz"
       ]
