@@ -27,9 +27,8 @@ resource "aws_instance" "theseeker" {
   /* provisioners */
   provisioner "remote-exec" {
     inline = [
-#    "sudo su -c 'curl -L https://www.opscode.com/chef/install.sh | bash'",
-    "sudo yum update -y",
-    "sudo yum install git -y",
+    "sudo su -c 'curl -L https://www.opscode.com/chef/install.sh | bash'", # chef DK
+    "sudo yum update -y"
     ]
     connection {
       type = "ssh"
@@ -37,6 +36,11 @@ resource "aws_instance" "theseeker" {
       key_file = "${var.keyfile}"
     }
   }
+  /* upload the recipes to our web server */
+  provisioner "local-exec" {
+    command = "scp -r -i ${var.keyfile} -oStrictHostKeyChecking=no ./chef ec2-user@${aws_instance.theseeker.public_dns}:."
+  }
+
 }
 
 output "public_dns" {
