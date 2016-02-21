@@ -25,22 +25,24 @@ resource "aws_instance" "theseeker" {
   }
 
   /* provisioners */
-  provisioner "remote-exec" {
-    inline = [
-    "sudo su -c 'curl -L https://www.opscode.com/chef/install.sh | bash'", # chef DK
-    "sudo yum update -y"
-    ]
-    connection {
-      type = "ssh"
-      user = "ec2-user"
-      key_file = "${var.keyfile}"
-    }
-  }
-  /* upload the recipes to our web server */
-  provisioner "local-exec" {
-    command = "scp -r -i ${var.keyfile} -oStrictHostKeyChecking=no ./chef-repo ec2-user@${aws_instance.theseeker.public_dns}:."
-  }
 
+    /* install the Chef Development Kit */
+    provisioner "remote-exec" {
+      inline = [
+      "sudo su -c 'curl -L https://www.opscode.com/chef/install.sh | bash'", # chef DK
+      "sudo yum update -y"
+      ]
+      connection {
+        type = "ssh"
+        user = "ec2-user"
+        key_file = "${var.keyfile}"
+      }
+    }
+
+    /* upload the recipes to our web server */
+    provisioner "local-exec" {
+      command = "scp -r -i ${var.keyfile} -oStrictHostKeyChecking=no ./chef-repo ec2-user@${aws_instance.theseeker.public_dns}:."
+    }
 }
 
 output "public_dns" {
