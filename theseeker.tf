@@ -35,7 +35,7 @@ resource "aws_instance" "theseeker" {
       "sudo gem update --system",
       "sudo gem install knife-solo",
       "knife solo init chef-repo",
-      "cd chef-repo; knife solo onfigure client"
+#      "cd chef-repo; knife solo bootstrap"
       ]
       connection {
         type = "ssh"
