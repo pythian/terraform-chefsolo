@@ -29,12 +29,13 @@ resource "aws_instance" "theseeker" {
     /* install the Chef Development Kit */
     provisioner "remote-exec" {
       inline = [
-#     "sudo su -c 'curl -L https://www.opscode.com/chef/install.sh | bash'", # chef DK
+      "sudo su -c 'curl -L https://www.opscode.com/chef/install.sh | bash'", # chef DK
       "sudo yum update -y",
       "sudo yum install gcc ruby rubygems ruby-devel -y",
       "sudo gem update --system",
       "sudo gem install knife-solo",
-      "knife solo init chef-repo"
+      "knife solo init chef-repo",
+      "cd chef-repo; knife configure client --validation-key ./validation.pem"
       ]
       connection {
         type = "ssh"
