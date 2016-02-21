@@ -29,8 +29,12 @@ resource "aws_instance" "theseeker" {
     /* install the Chef Development Kit */
     provisioner "remote-exec" {
       inline = [
-      "sudo su -c 'curl -L https://www.opscode.com/chef/install.sh | bash'", # chef DK
-      "sudo yum update -y"
+#     "sudo su -c 'curl -L https://www.opscode.com/chef/install.sh | bash'", # chef DK
+      "sudo yum update -y",
+      "sudo yum install gcc ruby rubygems ruby-devel",
+      "sudo gem update --system",
+      "sudo gem install knife-solo",
+      "knife solo init chef-repo"
       ]
       connection {
         type = "ssh"
@@ -40,9 +44,9 @@ resource "aws_instance" "theseeker" {
     }
 
     /* upload the recipes to our web server */
-    provisioner "local-exec" {
-      command = "scp -r -i ${var.keyfile} -oStrictHostKeyChecking=no ./chef-repo ec2-user@${aws_instance.theseeker.public_dns}:."
-    }
+#    provisioner "local-exec" {
+#      command = "scp -r -i ${var.keyfile} -oStrictHostKeyChecking=no ./chef-repo ec2-user@${aws_instance.theseeker.public_dns}:."
+#    }
 }
 
 output "public_dns" {
