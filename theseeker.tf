@@ -37,7 +37,7 @@ resource "aws_instance" "theseeker" {
       }
     }
 
-    /* install the Chef Development Kit */
+    /* install knife-solo and configure for chef-solo operation */
     provisioner "remote-exec" {
       inline = [
       "chmod 600 .ssh/mykey",
