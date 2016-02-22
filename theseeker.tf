@@ -45,12 +45,12 @@ resource "aws_instance" "theseeker" {
       "sudo gem update --system",
       "sudo gem install knife-solo",
       "knife solo init chef-repo; cd chef-repo",
-      "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey",
+      "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey; rm ../install.sh",
       "knife cookbook create chef-solo-workstation",
       "knife cookbook site download ntp",
-      "tar xvzf ntp*.tar.gz --directory cookbooks; rm -f ntp*.tar.gz",
+      "tar xvzf ntp*.tar.gz --directory cookbooks; rm ntp*.tar.gz",
       "knife cookbook site download httpd",
-      "tar xvzf httpd*.tar.gz --directory cookbooks; rm -f httpd*.tar.gz"
+      "tar xvzf httpd*.tar.gz --directory cookbooks; rm httpd*.tar.gz"
       ]
       connection {
         type = "ssh"
