@@ -40,6 +40,7 @@ resource "aws_instance" "theseeker" {
     /* install the Chef Development Kit */
     provisioner "remote-exec" {
       inline = [
+      "chmod 600 .ssh/mykey",
       "sudo yum update -y",
       "sudo yum install git gcc ruby rubygems ruby-devel -y",
       "sudo gem update --system",
