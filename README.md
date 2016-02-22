@@ -11,9 +11,9 @@ Create a file called terraform.tfvars with the following private content:
 Most configuration values are in the variables.rf template.
 
 # chef-solo-server bootstrapping
-Runs 'knife solo prepare' on the localhost using the ec2-user's private key.
-Runs 'knife solo init' to create the initial chef-solo repository.
-Downloads the ntp cookbook and adds it the the run list for localhost.
+- Runs 'knife solo prepare' on the localhost using the ec2-user's private key.
+- Runs 'knife solo init' to create the initial chef-solo repository.
+- Downloads the ntp cookbook and adds it the the run list for localhost.
 
 See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/).
 
