@@ -18,8 +18,8 @@ Downloads the ntp cookbook and adds it the the run list for localhost.
 See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/).
 
 # chef-solo usage
-Implement cookbooks, recipes as needed in the chef-repo.
-Bring up a target host for management in AWS using the same EC2 keypair as the chef-solo server.
-Use 'knife solo prepare user@hostname -i ~/.ssh/mykey' to install chef on the target host using knife solo.
-Use 'knife node --local-mode run_list add hostname 'recipe[<cookbook>::<recipe>]'' to add a run list to your node.
-Use 'knife solo cook user@hostname -i ~/.ssh/mykey' to upload the chef-repo and execute the run list against the target host.
+- Implement cookbooks, recipes as needed in the chef-repo.
+- Bring up a target host for management in AWS using the same EC2 keypair as the chef-solo server.
+- Use 'knife solo prepare user@hostname -i ~/.ssh/mykey' to install chef on the target host using knife solo.
+- Use 'knife node --local-mode run_list add hostname 'recipe[<cookbook>::<recipe>]'' to add a run list to your node.
+- Use 'knife solo cook user@hostname -i ~/.ssh/mykey' to upload the chef-repo and execute the run list against the target host.
