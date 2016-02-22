@@ -47,6 +47,8 @@ resource "aws_instance" "theseeker" {
       "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey",
       "knife solo init chef-repo",
       "knife cookbook create chef-solo-workstation",
+      "knife cookbook site download ntp",
+      "tar xvzf ntp*.tar.gz --directory cookbooks; rm -f ntp*.tar.gz",
       "knife cookbook site download httpd",
       "tar xvzf httpd*.tar.gz --directory cookbooks; rm -f httpd*.tar.gz"
       ]
