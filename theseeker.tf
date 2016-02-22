@@ -50,7 +50,8 @@ resource "aws_instance" "theseeker" {
       "knife cookbook site download ntp",
       "tar xvzf ntp*.tar.gz --directory cookbooks; rm ntp*.tar.gz",
       "knife cookbook site download httpd",
-      "tar xvzf httpd*.tar.gz --directory cookbooks; rm httpd*.tar.gz"
+      "tar xvzf httpd*.tar.gz --directory cookbooks; rm httpd*.tar.gz",
+      "knife node --local-mode run_list add localhost 'recipe[chef-solo-workstation]'"
       ]
       connection {
         type = "ssh"
