@@ -49,6 +49,10 @@ resource "aws_instance" "theseeker" {
       "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey; rm ../install.sh",
       "knife cookbook site download ntp",
       "tar xvzf ntp*.tar.gz --directory cookbooks; rm ntp*.tar.gz",
+      "knife cookbook site download windows", #needed for a stupid hardcoded dependency in the ntp cookbook
+      "tar xvzf windows*.tar.gz --directory cookbooks; rm windows*.tar.gz",
+      "knife cookbook site download chef_handler", #needed because there's no chef server
+      "tar xvzf chef_handler*.tar.gz --directory cookbooks; rm chef_handler*.tar.gz",
       "knife node --local-mode run_list add localhost 'recipe[ntp::default]'"
       ]
       connection {
