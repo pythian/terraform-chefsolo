@@ -1,5 +1,5 @@
 # theseeker
-Amazon test host for bootstrap and playbook/recipe testing; deployed via terrafrom templates.
+Amazon test host for bootstrap and chef recipe testing; deployed via terrafrom templates.
 
 - Create a file called terraform.tfvars with the following private content:
 
