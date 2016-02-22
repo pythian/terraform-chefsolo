@@ -15,7 +15,7 @@ Runs 'knife solo prepare' on the localhost using the ec2-user's private key.
 Runs 'knife solo init' to create the initial chef-solo repository.
 Creates the chef-solo-workstation recipe, configures and runs it on the local host.
 
-See the knife-solo documentation (here)[https://matschaffer.github.io/knife-solo/].
+See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/).
 
 # chef-solo usage
 Implement cookbooks and recipes as needed in the chef-repo (for example, chef-solo-workstation will be deployed in template theseeker.tf).
