@@ -61,11 +61,6 @@ resource "aws_instance" "theseeker" {
         key_file = "${var.keyfile}"
       }
     }
-
-    /* upload the recipes to our web server */
-#    provisioner "local-exec" {
-#      command = "scp -r -i ${var.keyfile} -oStrictHostKeyChecking=no ./chef-repo ec2-user@${aws_instance.theseeker.public_dns}:."
-#    }
 }
 
 output "public_dns" {
