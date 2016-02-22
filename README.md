@@ -10,7 +10,7 @@ Amazon test host for bootstrap and chef recipe testing; deployed via terraform t
 
 - Most configuration values are in the variables.rf template.
 
-# chef-solo-server bootstrapping
+# chef-solo workstation bootstrapping
 - Runs 'knife solo prepare' on the localhost using the ec2-user's private key.
 - Runs 'knife solo init' to create the initial chef-solo repository.
 - Downloads the ntp cookbook and dependencies, adds it to the run list for node localhost.
