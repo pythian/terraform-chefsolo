@@ -1,19 +1,19 @@
 # theseeker
 Amazon test host for bootstrap and playbook/recipe testing; deployed via terrafrom templates.
 
-Create a file called terraform.tfvars with the following private content:
+- Create a file called terraform.tfvars with the following private content:
 
   access_key="" # your AWS access key id <br />
   secret_key="" # your AWS secret access key <br />
   keypair="" # name of your ec2 keypair <br />
   keyfile="" # path to your ec2 keypair's  private key
 
-Most configuration values are in the variables.rf template.
+- Most configuration values are in the variables.rf template.
 
 # chef-solo-server bootstrapping
 - Runs 'knife solo prepare' on the localhost using the ec2-user's private key.
 - Runs 'knife solo init' to create the initial chef-solo repository.
-- Downloads the ntp cookbook and adds it the the run list for localhost.
+- Downloads the ntp cookbook and adds it to the run list for node localhost.
 
 See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/).
 
