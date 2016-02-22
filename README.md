@@ -24,7 +24,7 @@ Ensure that there is a 'nodes/<hostname>.json' file with the hostname of the tar
 
   {
     "run_list": [
-      "recipe[chef-solo-workstation]"
+      "recipe[chef-solo-workstation::default]"
     ]
   }
 
