@@ -25,18 +25,47 @@ resource "aws_instance" "theseeker" {
   }
 
   /* provisioners */
-  provisioner "remote-exec" {
-    inline = [
-#    "sudo su -c 'curl -L https://www.opscode.com/chef/install.sh | bash'",
-    "sudo yum update -y",
-    "sudo yum install git -y",
-    ]
-    connection {
-      type = "ssh"
-      user = "ec2-user"
-      key_file = "${var.keyfile}"
+
+    /* copy up private keyfile for chef-solo to use */
+    provisioner "file" {
+      source = "${var.keyfile}"
+      destination = "/home/ec2-user/.ssh/mykey"
+      connection {
+        type = "ssh"
+        user = "ec2-user"
+        key_file = "${var.keyfile}"
+      }
     }
-  }
+
+    /* install the Chef Development Kit */
+    provisioner "remote-exec" {
+      inline = [
+      "chmod 600 .ssh/mykey",
+      "sudo yum update -y",
+      "sudo yum install git gcc ruby rubygems ruby-devel -y",
+      "sudo gem update --system",
+      "sudo gem install knife-solo",
+      "knife solo init chef-repo; cd chef-repo",
+      "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey; rm ../install.sh",
+      "knife cookbook site download ntp",
+      "tar xvzf ntp*.tar.gz --directory cookbooks; rm ntp*.tar.gz",
+      "knife cookbook site download windows", #needed for a stupid hardcoded dependency in the ntp cookbook
+      "tar xvzf windows*.tar.gz --directory cookbooks; rm windows*.tar.gz",
+      "knife cookbook site download chef_handler", #needed because there's no chef server
+      "tar xvzf chef_handler*.tar.gz --directory cookbooks; rm chef_handler*.tar.gz",
+      "knife node --local-mode run_list add localhost 'recipe[ntp::default]'"
+      ]
+      connection {
+        type = "ssh"
+        user = "ec2-user"
+        key_file = "${var.keyfile}"
+      }
+    }
+
+    /* upload the recipes to our web server */
+#    provisioner "local-exec" {
+#      command = "scp -r -i ${var.keyfile} -oStrictHostKeyChecking=no ./chef-repo ec2-user@${aws_instance.theseeker.public_dns}:."
+#    }
 }
 
 output "public_dns" {
