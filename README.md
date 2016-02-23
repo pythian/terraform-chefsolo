@@ -1,6 +1,7 @@
-# theseeker terraform templates
+# theseeker
 Amazon test host for bootstrap and chef recipe testing; deployed via terraform templates.
 
+# terraform templates
 - Create a file called terraform.tfvars with the following private content:
 
   access_key="" # your AWS access key id <br />
@@ -12,7 +13,7 @@ Amazon test host for bootstrap and chef recipe testing; deployed via terraform t
 
 See the terraform documentation [here](https://www.terraform.io/docs/).
 
-# chef-solo workstation bootstrapping
+# chef-solo bootstrapping
 - Runs 'knife solo prepare' on the localhost using the ec2-user's private key.
 - Runs 'knife solo init' to create the initial chef-solo repository.
 - Downloads the ntp cookbook and dependencies, adds it to the run list for node localhost.
