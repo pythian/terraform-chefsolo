@@ -19,8 +19,8 @@ resource "aws_security_group" "sg_theseeker_access" {
 }
 
 resource "aws_security_group" "sg_chef-client_access" {
-  name = "sg_theseeker_access"
-  description = "Allow inbound access to the chef-clients"
+  name = "sg_chef-client_access"
+  description = "Allow inbound access to the chef-clients from theseeker"
 
   ingress {
     from_port = 22
