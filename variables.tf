@@ -18,6 +18,7 @@ variable "region" {
 variable "insttype" {
   default = {
     "utility" = "t2.micro"
+    "chef-client" = "t2.micro"
   }
 }
 
