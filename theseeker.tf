@@ -51,7 +51,7 @@ resource "aws_instance" "theseeker" {
       /* here we are rendering the chef-client address for configuration on theseeker */
       "knife cookbook site download hostsfile",
       "tar xvzf hostsfile*.tar.gz --directory cookbooks; rm hostsfile*.tar.gz; mkdir cookbooks/hostsfile/recipes",
-      "echo \"${template_file.recipe_hosts_default.rendered}\" >> cookbooks/hostsfile/recipes/defult.rb",
+      "echo \"${template_file.recipe_hosts_default.rendered}\" >> cookbooks/hostsfile/recipes/default.rb",
 
       /* cookbooks needed to configure ntp, our default recipe */
       "knife cookbook site download ntp",
