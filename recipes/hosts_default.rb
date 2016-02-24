@@ -5,7 +5,7 @@ hostsfile_entry '${chef-client-addr}' do
 end
 
 #chef-workstation entry in /etc/hosts
-hostsfile_entry '${chef-workstation-addr}' do
-  hostname 'chef-workstation'
-  action :append
-end
+#hostsfile_entry '${chef-workstation-addr}' do
+#  hostname 'chef-workstation'
+#  action :append
+#end
