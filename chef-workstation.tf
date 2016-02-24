@@ -19,7 +19,7 @@ resource "aws_instance" "chef-workstation" {
   vpc_security_group_ids = ["${aws_security_group.sg_chef-workstation_access.id}"]
 
   tags {
-    Name = "chef-workstations"
+    Name = "chef-workstation"
     Platform = "${var.ami.platform}"
     Tier = "utility"
   }
