@@ -14,7 +14,7 @@ Amazon test workstation and client host for bootstrap and chef recipe testing; d
 See the terraform documentation [here](https://www.terraform.io/docs/).
 
 # chef-solo workstation bootstrapping
-- Runs 'knife solo prepare' on the chef-wrokstation host using the ec2-user's private key.
+- Runs 'knife solo prepare' on the chef-workstation host using the ec2-user's private key.
 - Runs 'knife solo init' to create the initial chef-solo repository.
 - Downloads the hostfile cookbook and renders the default recipe (adding the latest 'chef-client' address to /etc/hosts).
 - Downloads the ntp cookbook and dependencies.
