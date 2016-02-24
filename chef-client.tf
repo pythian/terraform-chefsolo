@@ -18,7 +18,7 @@ resource "aws_instance" "chef-client" {
   vpc_security_group_ids = ["${aws_security_group.sg_chef-client_access.id}"]
 
   tags {
-    Name = "theseeker"
+    Name = "chef-client"
     Platform = "${var.ami.platform}"
     Tier = "client"
   }
