@@ -62,7 +62,11 @@ resource "aws_instance" "chef-workstation" {
       "tar xvzf chef_handler*.tar.gz --directory cookbooks; rm chef_handler*.tar.gz",
 
       /* here we add the default hostsfile recipe containing the chef client address and add it to the run list */
-      "knife node --local-mode run_list add localhost 'recipe[hostsfile::default]'"
+      "knife node --local-mode run_list add localhost 'recipe[hostsfile::default]'",
+
+      /* adding the aws cookbook here, to mess around with */
+      "knife cookbook site download aws",
+      "tar xvzf aws*tar.gz --directory cookbooks; rm aws*.tar.gz"
       ]
       connection {
         type = "ssh"
