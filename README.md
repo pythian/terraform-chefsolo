@@ -25,7 +25,7 @@ See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/
 
 # chef-solo usage
 - Change to the chef-repo directory, where knife is configured.
-- Use 'knife solo cook ec2-user@localhost -i ~/.ssh/mykey' to apply the configured ntp and hostsfile cookbooks to the local host.
+- Use 'knife solo cook ec2-user@localhost -i ~/.ssh/mykey' to apply the configured cookbooks to the local host.
 - Implement additional cookbooks, recipes and roles as needed in the chef-repo.
 
 # chef-client
