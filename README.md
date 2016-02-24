@@ -31,6 +31,6 @@ See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/
 # chef-client
 - A second template brings up a target host for management in using the same EC2 keypair as theseeker.
 - Use 'knife solo prepare user@chef-client -i ~/.ssh/mykey' to install chef on the target host using knife solo.
-- Use 'knife node --local-mode run_list add hostname 'recipe[cookbook::recipe]'' to add recipes to the run list for the node.
-- Use 'knife solo cook user@hostname -i ~/.ssh/mykey' to upload the chef-repo and execute the run list against the target host.
-- Use 'knife solo clean user@hostname -i ~/.ssh/mykey' to tidy up after chef-solo on the host.
+- Use 'knife node --local-mode run_list add chef-client 'recipe[cookbook::recipe]'' to add recipes to the run list.
+- Use 'knife solo cook user@chef-client -i ~/.ssh/mykey' to upload the chef-repo and execute the run list.
+- Use 'knife solo clean user@chef-client -i ~/.ssh/mykey' to tidy up after chef-solo on the host.
