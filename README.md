@@ -16,8 +16,8 @@ See the terraform documentation [here](https://www.terraform.io/docs/).
 # chef-solo bootstrapping
 - Runs 'knife solo prepare' on the localhost using the ec2-user's private key.
 - Runs 'knife solo init' to create the initial chef-solo repository.
-- Downloads the hostfile cookbook
-- Downloads the ntp cookbook and dependencies
+- Downloads the hostfile cookbook and renders the default recipe (adding the latest 'chef-client' address).
+- Downloads the ntp cookbook and dependencies.
 - Adds the above two cookbooks to the run list for node localhost.
 - Downloads chef_handler cookbook, needed locally for solo operations.
 
@@ -29,7 +29,7 @@ See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/
 - Implement additional cookbooks, recipes and roles as needed in the chef-repo.
 
 # chef-client
-- Asecond template brings up a target host for management in using the same EC2 keypair as theseeker.
+- A second template brings up a target host for management in using the same EC2 keypair as theseeker.
 - Use 'knife solo prepare user@chef-client -i ~/.ssh/mykey' to install chef on the target host using knife solo.
 - Use 'knife node --local-mode run_list add hostname 'recipe[cookbook::recipe]'' to add recipes to the run list for the node.
 - Use 'knife solo cook user@hostname -i ~/.ssh/mykey' to upload the chef-repo and execute the run list against the target host.
