@@ -1,7 +1,7 @@
 /* create the host security group */
-resource "aws_security_group" "sg_theseeker_access" {
-  name = "sg_theseeker_access"
-  description = "Allow inbound access to theseeker"
+resource "aws_security_group" "sg_chef-workstation_access" {
+  name = "sg_chef-workstation_access"
+  description = "Allow inbound access to the chef-workstation"
   
   ingress {
     from_port = 22
@@ -20,13 +20,13 @@ resource "aws_security_group" "sg_theseeker_access" {
 
 resource "aws_security_group" "sg_chef-client_access" {
   name = "sg_chef-client_access"
-  description = "Allow inbound access to the chef-clients from theseeker"
+  description = "Allow inbound access to the chef-clients from the chef-workstation"
 
   ingress {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    security_groups = ["${aws_security_group.sg_theseeker_access.id}"]
+    security_groups = ["${aws_security_group.sg_chef-workstation_access.id}"]
   }
 
   egress {
