@@ -14,26 +14,26 @@ Amazon test workstation and client host for bootstrap and chef recipe testing; d
 See the terraform documentation [here](https://www.terraform.io/docs/).
 
 # chef-solo workstation bootstrapping
-- Runs 'knife solo prepare' on the localhost using the ec2-user's private key.
+- Runs 'knife solo prepare' on the chef-wrokstation host using the ec2-user's private key.
 - Runs 'knife solo init' to create the initial chef-solo repository.
-- Downloads the hostfile cookbook and renders the default recipe (adding the latest 'chef-client' address).
+- Downloads the hostfile cookbook and renders the default recipe (adding the latest 'chef-client' address to /etc/hosts).
 - Downloads the ntp cookbook and dependencies.
-- Adds the above two cookbooks to the run list for node localhost.
-- Downloads chef_handler cookbook, needed locally for solo operations.
+- Downloads the chef_handler cookbook, needed for haedless operation.
+- Adds the hostsfile recipe to the run list for node localhost on the chef-workstation. 
 
 See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/).
 
 # chef-solo usage
 - Log in as user 'ec2-user' with your EC2 private key and the public DNS address output by Terraform.
 - Change to the chef-repo directory, where knife is configured.
-- Use 'knife solo cook ec2-user@localhost -i ~/.ssh/mykey' to apply the configured cookbooks to the local host.
+- Use 'knife solo cook ec2-user@localhost -i ~/.ssh/mykey' to apply the chef-client address to /etc/hosts.
 - Implement additional cookbooks, recipes and roles as needed in the chef-repo.
 
 # chef-client
 - A second template brings up a target host for management in using the same EC2 keypair as the chef workstation.
 - Here are some useful commands to manage the environment...
 --'knife solo prepare user@chef-client -i ~/.ssh/mykey' to install chef on the target host using knife solo.
---'knife node --local-mode list' to view the configured nodes (chef-workstation, to start).
+--'knife node --local-mode list' to view the configured nodes (localhost, to start).
 --'knife node --local-mode add chef-client' to add the chef-client nodes to the configuration.
 --'knife node --local-mode show chef-client' to view the node's configuration attributes, including the run list.
 --'knife node --local-mode run_list add chef-client 'recipe[cookbook::recipe]'' to add recipes to the run list.
