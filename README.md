@@ -13,7 +13,8 @@ Amazon test workstation and client host for bootstrap and chef recipe testing; d
 
 See the terraform documentation [here](https://www.terraform.io/docs/).
 
-# chef-solo workstation bootstrapping
+# chef-workstation bootstrapping
+The main template brings up a chef-solo workstation environment and prepares the core tool set.
 - Installs knife-solo, knife-ec2 and knife-solo_data_bg gems, configures EC2 access key from Terraform in .chef/knife.rb
 - Runs 'knife solo prepare' on the chef-workstation host using the ec2-user's private key.
 - Runs 'knife solo init' to create the initial chef-solo repository.
@@ -25,6 +26,7 @@ See the terraform documentation [here](https://www.terraform.io/docs/).
 See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/).
 
 # chef-solo usage
+To get started, connect to the chef-workstation host.
 - Log in as user 'ec2-user' with your EC2 private key and the public DNS address output by Terraform.
 - Change to the chef-repo directory, where knife is configured.
 - Use 'knife solo cook ec2-user@localhost -i ~/.ssh/mykey' to apply the chef-client address to /etc/hosts.
