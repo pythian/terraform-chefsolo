@@ -15,7 +15,7 @@ See the terraform documentation [here](https://www.terraform.io/docs/).
 
 # chef-workstation bootstrapping
 The main template brings up a chef-solo workstation environment and prepares the core tool set.
-- Installs knife-solo, knife-ec2 and knife-solo_data_bg gems, configures EC2 access key from Terraform in .chef/knife.rb
+- Installs knife-solo, knife-ec2 and knife-solo_data_bg gems, configures AWS/EC2 access keys from Terraform values in '.chef/knife.rb'.
 - Runs 'knife solo prepare' on the chef-workstation host using the ec2-user's private key.
 - Runs 'knife solo init' to create the initial chef-solo repository.
 - Downloads the hostfile cookbook and renders the default recipe (adding the latest 'chef-client' address to /etc/hosts).
