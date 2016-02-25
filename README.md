@@ -31,7 +31,7 @@ See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/
 
 # chef-client
 - A second template brings up a target host for management in using the same EC2 keypair as the chef workstation.
-- Here are some useful commands to manage the environment... <br />
+- Here are some useful commands to manage the environment...
 
   'knife solo prepare user@chef-client -i ~/.ssh/mykey' to install chef on the target host using knife solo. <br />
   'knife node --local-mode list' to view the configured nodes (localhost, to start). <br />
