@@ -32,10 +32,10 @@ See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/
 # chef-client
 - A second template brings up a target host for management in using the same EC2 keypair as the chef workstation.
 - Here are some useful commands to manage the environment...
---'knife solo prepare user@chef-client -i ~/.ssh/mykey' to install chef on the target host using knife solo.
---'knife node --local-mode list' to view the configured nodes (localhost, to start).
---'knife node --local-mode add chef-client' to add the chef-client nodes to the configuration.
---'knife node --local-mode show chef-client' to view the node's configuration attributes, including the run list.
---'knife node --local-mode run_list add chef-client 'recipe[cookbook::recipe]'' to add recipes to the run list.
---'knife solo cook user@chef-client -i ~/.ssh/mykey' to upload the chef-repo and execute the run list.
+  'knife solo prepare user@chef-client -i ~/.ssh/mykey' to install chef on the target host using knife solo. <br />
+  'knife node --local-mode list' to view the configured nodes (localhost, to start). <br />
+  'knife node --local-mode add chef-client' to add the chef-client nodes to the configuration. <br />
+  'knife node --local-mode show chef-client' to view the node's configuration attributes, including the run list. <br />
+  'knife node --local-mode run_list add chef-client 'recipe[cookbook::recipe]'' to add recipes to the run list. <br />
+  'knife solo cook user@chef-client -i ~/.ssh/mykey' to upload the chef-repo and execute the run list. <br />
 - Use 'knife solo clean user@chef-client -i ~/.ssh/mykey' to tidy up after chef-solo on the host.
