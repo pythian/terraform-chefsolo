@@ -67,7 +67,7 @@ resource "aws_instance" "chef-workstation" {
       "knife cookbook site download chef_handler", #needed because there's no chef server
       "tar xvzf chef_handler*.tar.gz --directory cookbooks; rm chef_handler*.tar.gz",
 
-      /* here we add the default hostsfile recipe containing the chef client address and add it to the run list */
+      /* here we add the default hostsfile recipe containing the chef client address to the run list */
       "knife node --local-mode run_list add localhost 'recipe[hostsfile::default]'"
       ]
       connection {
