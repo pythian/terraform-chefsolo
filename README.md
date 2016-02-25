@@ -32,7 +32,7 @@ See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/
 - Implement additional cookbooks, recipes and roles as needed in the chef-repo.
 
 # chef-client provisioning
-- A second template brings up a target host for management in using the same EC2 keypair as the chef workstation.
+A second template brings up a target host for management in using the same EC2 keypair as the chef workstation.
 - Here are some useful commands to manage the environment...
 
   'knife solo prepare user@chef-client -i ~/.ssh/mykey' to install chef on the target host using knife solo. <br />
