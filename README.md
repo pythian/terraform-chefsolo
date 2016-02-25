@@ -22,7 +22,7 @@ The main template brings up a chef-solo workstation environment and prepares the
 - Runs 'knife solo init' to create the initial chef-solo repository.
 - Downloads the hostfile cookbook and renders the default recipe (adding the latest 'chef-client' address to /etc/hosts).
 - Downloads the ntp cookbook and dependencies.
-- Downloads the chef_handler cookbook, needed for haedless operation.
+- Downloads the chef_handler cookbook, needed for headless operation.
 - Adds the hostsfile recipe to the run list for node localhost on the chef-workstation. 
 
 See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/).
