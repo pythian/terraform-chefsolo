@@ -45,6 +45,7 @@ resource "aws_instance" "chef-workstation" {
       "sudo yum install git gcc ruby rubygems ruby-devel -y",
       "sudo gem update --system",
       "sudo gem install knife-solo",
+      "sudo gem install knife-solo_data_bag",
       "knife solo init chef-repo; cd chef-repo",
       "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey; rm ../install.sh",
 
@@ -62,13 +63,7 @@ resource "aws_instance" "chef-workstation" {
       "tar xvzf chef_handler*.tar.gz --directory cookbooks; rm chef_handler*.tar.gz",
 
       /* here we add the default hostsfile recipe containing the chef client address and add it to the run list */
-      "knife node --local-mode run_list add localhost 'recipe[hostsfile::default]'",
-
-      /* adding the aws cookbook and dependencies here, to mess around with */
-      "knife cookbook site download aws",
-      "tar xvzf aws*tar.gz --directory cookbooks; rm aws*.tar.gz",
-      "knife cookbook site download ohai",
-      "tar xvzf ohai*.tar.gz --directory cookbooks; rm ohai*.tar.gz"
+      "knife node --local-mode run_list add localhost 'recipe[hostsfile::default]'"
       ]
       connection {
         type = "ssh"
