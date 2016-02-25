@@ -43,5 +43,4 @@ A second template brings up a target host for management in using the same EC2 k
   'knife node --local-mode show chef-client' to view the node's configuration attributes, including the run list. <br />
   'knife node --local-mode run_list add chef-client 'recipe[cookbook::recipe]'' to add recipes to the run list. <br />
   'knife solo cook user@chef-client -i ~/.ssh/mykey' to upload the chef-repo and execute the run list. <br />
-
-- Use 'knife solo clean user@chef-client -i ~/.ssh/mykey' to tidy up after chef-solo on the host.
+  'knife solo clean user@chef-client -i ~/.ssh/mykey' to tidy up after chef-solo on the host.
