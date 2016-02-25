@@ -2,6 +2,8 @@
 Amazon test workstation and client host for bootstrap and chef recipe testing; deployed via terraform templates.
 
 # terraform templates
+This environment is configured via terraform.
+
 - Create a file called terraform.tfvars with the following private content:
 
   access_key="" # your AWS access key id <br />
