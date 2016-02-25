@@ -6,3 +6,7 @@ resource "template_file" "recipe_hosts_default" {
   }
 }
 
+resource "template_file" "knife_config_file" {
+  filename = "configs/knife.rb"
+}
+

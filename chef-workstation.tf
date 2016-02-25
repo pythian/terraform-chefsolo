@@ -42,10 +42,11 @@ resource "aws_instance" "chef-workstation" {
       inline = [
       "chmod 600 .ssh/mykey",
       "sudo yum update -y",
-      "sudo yum install git gcc ruby rubygems ruby-devel -y",
+      "sudo yum install zlib-devel git gcc ruby rubygems ruby-devel -y",
       "sudo gem update --system",
       "sudo gem install knife-solo",
       "sudo gem install knife-solo_data_bag",
+      "sudo gem install knife-ec2",
       "knife solo init chef-repo; cd chef-repo",
       "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey; rm ../install.sh",
 
@@ -53,6 +54,9 @@ resource "aws_instance" "chef-workstation" {
       "knife cookbook site download hostsfile",
       "tar xvzf hostsfile*.tar.gz --directory cookbooks; rm hostsfile*.tar.gz; mkdir cookbooks/hostsfile/recipes",
       "echo \"${template_file.recipe_hosts_default.rendered}\" >> cookbooks/hostsfile/recipes/default.rb",
+
+      /* here we'll render and upload the knife.rb file with AWS access key and secret configured */
+      "echo \"${template_file.knife_config_file.rendered}\" >> .chef/knife.rb",
 
       /* cookbooks needed to configure ntp, our default recipe */
       "knife cookbook site download ntp",
