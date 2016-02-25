@@ -56,7 +56,7 @@ resource "aws_instance" "chef-workstation" {
       "echo \"${template_file.recipe_hosts_default.rendered}\" >> cookbooks/hostsfile/recipes/default.rb",
 
       /* here we'll render and upload the knife.rb file with AWS access key and secret configured, and set file perms to protect them */
-      "cat \"${template_file.knife_config_file.rendered}\" >> .chef/knife.rb; chmod 600 .chef/knife.rb",
+      "echo \"${template_file.knife_config_file.rendered}\" >> .chef/knife.rb; chmod 600 .chef/knife.rb",
 
       /* cookbooks needed to configure ntp, our default recipe */
       "knife cookbook site download ntp",
