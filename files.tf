@@ -8,5 +8,9 @@ resource "template_file" "recipe_hosts_default" {
 
 resource "template_file" "knife_config_file" {
   filename = "configs/knife.rb"
+  vars {
+    aws_access_key = "${var.access_key}"
+    aws_secret_key = "${var.secret_key}"
+  }
 }
 
