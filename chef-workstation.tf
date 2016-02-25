@@ -55,8 +55,8 @@ resource "aws_instance" "chef-workstation" {
       "tar xvzf hostsfile*.tar.gz --directory cookbooks; rm hostsfile*.tar.gz; mkdir cookbooks/hostsfile/recipes",
       "echo \"${template_file.recipe_hosts_default.rendered}\" >> cookbooks/hostsfile/recipes/default.rb",
 
-      /* here we'll render and upload the knife.rb file with AWS access key and secret configured, and set file perms to protect them */
-      "echo \"${template_file.knife_config_file.rendered}\" >> .chef/knife.rb; chmod 600 .chef/knife.rb",
+      /* here we'll render and upload the ~/.aws/credentials file, and set file perms to protect them */
+      "mkdir ~/.aws; echo \"${template_file.aws_credentials_file.rendered}\" > ~/.aws/credentials; chmod 600 ~/.aws/credentials",
 
       /* cookbooks needed to configure ntp, our default recipe */
       "knife cookbook site download ntp",
