@@ -57,7 +57,7 @@ resource "aws_instance" "chef-workstation" {
 
       /* here we'll render and upload the ~/.aws/credentials file, and set file perms to protect them */
       "mkdir ~/.aws; echo \"${template_file.aws_credentials_file.rendered}\" > ~/.aws/credentials; chmod 600 ~/.aws/credentials",
-      "echo -e \n\"knife[:aws_credential_file] = File.join(ENV['HOME'], \"/.aws/credentials\")\" >> .chef/knife.rb",
+      "echo \"$template_file.aws_knife_config.rendered}\" >> .chef/knife.rb",
 
       /* cookbooks needed to configure ntp, our default recipe */
       "knife cookbook site download ntp",

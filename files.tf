@@ -14,3 +14,6 @@ resource "template_file" "aws_credentials_file" {
   }
 }
 
+resource "template_file" "aws_knife_config" {
+  filename = "configs/aws_knife.rb"
+}
