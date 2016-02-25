@@ -1,7 +1,7 @@
 resource "template_file" "recipe_hostsfile_workstation" {
   filename = "recipes/hosts_workstation.rb"
   vars {
-    chef-client-addr = "${aws_instance.chef-client.private_ip}"
+#   chef-client-addr = "${aws_instance.chef-client.private_ip}"
 #   chef-workstation-addr = "${aws_instance.chef-workstation.private_ip}" #cycle error
   }
 }
