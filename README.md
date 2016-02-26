@@ -23,7 +23,8 @@ The main template brings up a chef-solo workstation environment and prepares the
 - Downloads the hostfile cookbook and renders the default recipe (adding the latest 'chef-client' address to /etc/hosts).
 - Downloads the ntp cookbook and dependencies.
 - Downloads the chef_handler cookbook, needed for headless operation.
-- Adds the hostsfile recipe to the run list for node localhost on the chef-workstation. 
+- Adds the hostsfile recipe to the run list for node localhost on the chef-workstation.
+- Runs the hostsfile recipes on localhost and then renames the node to chef-workstation.
 
 See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/).
 
@@ -31,7 +32,9 @@ See the knife-solo documentation [here](http://matschaffer.github.io/knife-solo/
 To get started, connect to the chef-workstation host.
 - Log in as user 'ec2-user' with your EC2 private key and the public DNS address output by Terraform.
 - Change to the chef-repo directory, where knife is configured.
-- Use 'knife solo cook ec2-user@localhost -i ~/.ssh/mykey' to apply the chef-client address to /etc/hosts.
+- Use 'knife node --local-mode list' to view configured nodes.
+- Use 'knife node --local-mode show chef-workstation' to view the run list
+- Use 'knife node --local-mode run_list add|remove chef-workstation 'recipe[cookbook::recipe]'' to manage the run list
 - Use 'knife ec2 --local-mode server list --region us-west-2' to query the AWS instances running in the environment.
 - Implement additional cookbooks, recipes and roles as needed in the chef-repo.
 

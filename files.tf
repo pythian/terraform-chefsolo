@@ -1,8 +1,11 @@
-resource "template_file" "recipe_hosts_default" {
-  filename = "recipes/hosts_default.rb"
+resource "template_file" "recipe_hostsfile_workstation" {
+  filename = "recipes/hosts_workstation.rb"
+}
+
+resource "template_file" "recipe_hostsfile_client" {
+  filename = "recipes/hosts_client.rb"
   vars {
     chef-client-addr = "${aws_instance.chef-client.private_ip}"
-#   chef-workstation-addr = "${aws_instance.chef-workstation.private_ip}" #cycle error
   }
 }
 
