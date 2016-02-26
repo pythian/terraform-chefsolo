@@ -49,13 +49,14 @@ resource "aws_instance" "chef-workstation" {
       "sudo gem install knife-ec2",
       "knife solo init chef-repo; cd chef-repo",
       "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey; rm ../install.sh",
+      "sudo mkdir -p /etc/chef/ohai/hints && touch /etc/chef/ohai/hints/ec2.json",
 
-      /* here we are rendering the chef-client address for configuration in /etc/hosts on the chef-workstation */
+      /* here we are rendering the chef-client recipe for configuration in /etc/hosts on the chef-workstation */
       "knife cookbook site download hostsfile",
       "tar xvzf hostsfile*.tar.gz --directory cookbooks; rm hostsfile*.tar.gz; mkdir cookbooks/hostsfile/recipes",
       "echo \"${template_file.recipe_hostsfile_client.rendered}\" >> cookbooks/hostsfile/recipes/client.rb",
 
-      /* here we are copying the chef-workstation recipe for configuration on the chef-workstation */
+      /* here we are copying the hostsfile-workstation recipe for configuration on the chef-workstation */
       "echo \"${template_file.recipe_hostsfile_workstation.rendered}\" >> cookbooks/hostsfile/recipes/workstation.rb",
 
       /* here we'll render and upload the ~/.aws/credentials file, and set file perms to protect them */
