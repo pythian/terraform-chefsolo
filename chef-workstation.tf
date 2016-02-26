@@ -71,7 +71,11 @@ resource "aws_instance" "chef-workstation" {
       "tar xvzf chef_handler*.tar.gz --directory cookbooks; rm chef_handler*.tar.gz",
 
       /* here we add the default hostsfile recipe containing the chef workstation address to the run list */
-      "knife node --local-mode run_list add localhost 'recipe[hostsfile::workstation]','recipe[hostsfile::client]'"
+      "knife node --local-mode run_list add localhost 'recipe[hostsfile::workstation]','recipe[hostsfile::client]'",
+      "knife solo cook localhost -i ~/.ssh/mykey",
+
+      /* hack to move node localhost to node chef-workstation, now that we have a resolvable name */
+      "mv nodes/localhost.json nodes/chef-workstation.json"
       ]
       connection {
         type = "ssh"
