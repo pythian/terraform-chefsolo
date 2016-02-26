@@ -50,12 +50,12 @@ resource "aws_instance" "chef-workstation" {
       "knife solo init chef-repo; cd chef-repo",
       "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey; rm ../install.sh",
 
-      /* download and configure ohai cookbook for ec2 metadata access */
-      "knife cookbook site download ohai",
-      "tar xvzf ohai*.tar.gz --directory cookbooks; rm ohai*.tar.gz",
-      "sudo mkdir -p /etc/chef/ohai/hints && touch /etc/chef/ohai/hints/ec2.json",
+      /* download and configure ohai cookbook for ec2 metadata access (suspect this is ot needed) */
+#      "knife cookbook site download ohai",
+#      "tar xvzf ohai*.tar.gz --directory cookbooks; rm ohai*.tar.gz",
+#      "sudo mkdir -p /etc/chef/ohai/hints && touch /etc/chef/ohai/hints/ec2.json",
 
-      /* here we are rendering the chef-client address for configuration on the chef-workstation */
+      /* here we are rendering the chef-workstation address for configuration on the chef-workstation */
       "knife cookbook site download hostsfile",
       "tar xvzf hostsfile*.tar.gz --directory cookbooks; rm hostsfile*.tar.gz; mkdir cookbooks/hostsfile/recipes",
       "echo \"${template_file.recipe_hostsfile_workstation.rendered}\" >> cookbooks/hostsfile/recipes/workstation.rb",
@@ -72,7 +72,7 @@ resource "aws_instance" "chef-workstation" {
       "knife cookbook site download chef_handler", #needed because there's no chef server
       "tar xvzf chef_handler*.tar.gz --directory cookbooks; rm chef_handler*.tar.gz",
 
-      /* here we add the default hostsfile recipe containing the chef client address to the run list */
+      /* here we add the default hostsfile recipe containing the chef workstation address to the run list */
       "knife node --local-mode run_list add localhost 'recipe[hostsfile::workstation]'"
       ]
       connection {
