@@ -25,7 +25,7 @@ variable "insttype" {
 variable "ami" {
   default = {
     "us-east-1" = "ami-8fcee4e5"
-    "us-west-2" = "ami-63b25203"
+    "us-west-2" = "ami-3d5db05d" #based on public Amazon ami "ami-63b25203"
     "platform" = "AmazonLinux"
   }
 }
