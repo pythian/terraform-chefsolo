@@ -40,7 +40,7 @@ resource "aws_instance" "chef-workstation" {
     /* install knife-solo and configure for chef-solo operation */
     provisioner "remote-exec" {
       inline = [
-      "chmod 600 .ssh/mykey",
+      "chmod 600 .ssh/mykey; cd chef-repo",
       /* render the chef-client and chef-workstation address recipes under the hostsfile cookbook */
       "echo \"${template_file.recipe_hostsfile_client.rendered}\" >> cookbooks/hostsfile/recipes/client.rb",
       "echo \"${template_file.recipe_hostsfile_workstation.rendered}\" >> cookbooks/hostsfile/recipes/workstation.rb",
