@@ -41,13 +41,16 @@ resource "aws_instance" "chef-workstation" {
     provisioner "remote-exec" {
       inline = [
       "chmod 600 .ssh/mykey",
-      /* render the chef-client and chef-workstation addresses recipes under the hostsfile cookbook */
+      /* render the chef-client and chef-workstation address recipes under the hostsfile cookbook */
       "echo \"${template_file.recipe_hostsfile_client.rendered}\" >> cookbooks/hostsfile/recipes/client.rb",
       "echo \"${template_file.recipe_hostsfile_workstation.rendered}\" >> cookbooks/hostsfile/recipes/workstation.rb",
 
       /* render the ~/.aws/credentials file, set file perms to protect it, and render the configuration update for knife */
       "mkdir ~/.aws; echo \"${template_file.aws_credentials_file.rendered}\" > ~/.aws/credentials; chmod 600 ~/.aws/credentials",
       "echo \"${template_file.aws_knife_config.rendered}\" >> .chef/knife.rb",
+
+      /* install chef on the local host and create the 'localhost' node */
+      "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey; rm ../install.sh",
 
       /* add recipes to the runlist for the local host containing the chef client and workstation addresses to the run list, and execute */
       "knife node --local-mode run_list add localhost 'recipe[hostsfile::workstation]','recipe[hostsfile::client]'",

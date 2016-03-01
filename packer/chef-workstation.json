@@ -26,8 +26,6 @@
       "knife solo init chef-repo",
       "cd chef-repo",
 
-      "knife solo prepare ec2-user@localhost -i ~/.ssh/mykey; rm ../install.sh",
-
       "knife cookbook site download hostsfile",
       "tar xvzf hostsfile*.tar.gz --directory cookbooks; rm hostsfile*.tar.gz; mkdir cookbooks/hostsfile/recipes",
       "knife cookbook site download ntp",
