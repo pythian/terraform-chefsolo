@@ -15,7 +15,7 @@
       "sleep 30",
 
       "sudo yum update -y",
-      "sudo yum install zlib-devel git gcc ruby rubygems ruby-devel -y",
+      "sudo yum install zlib-devel git gcc ruby rubygems ruby-devel telnet -y",
       "sudo gem update --system",
 
       "sudo gem install knife-solo --no-doc --no-ri",
